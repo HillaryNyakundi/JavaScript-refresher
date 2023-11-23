@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
        <meta charset="UTF-8">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>Js refresher 1</title>
+       <title>Country Data App</title>
        <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+       <h2 id="data">Country Data App</h2>
+
+       <!-- Buttons for each functionality -->
+       <div id="buttonContainer">
+              <button onclick="sortCountriesByPopulation()">Sort by Population</button>
+              <button onclick="filterCountriesWithPSK()">Filter by P, S, or K</button>
+              <button onclick="filterCountriesPerfectSquares()">Perfect Square Populations</button>
+              <button onclick="filterOddPopulationAndNameLength()">Odd Population and 5, 6, or 7 Letters</button>
+              <button onclick="sortCountriesByNameLength()">Sort by Name Length</button>
+       </div>
+       <!--Table to display default countries and their population-->
+       <table id="table_id">
+              <thead>
+                     <tr>
+                            <th>Country</th>
+                            <th>Population</th>
+                     </tr>
+              </thead>
+              <tbody id="countryTableBody">
+
+              </tbody>
+       </table>
+
+       <div id="resultContainer"></div>
+
        <script src="index.js"></script>
+
 </body>
+
 </html>

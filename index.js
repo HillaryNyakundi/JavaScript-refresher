@@ -1,43 +1,35 @@
-const country_pop = [
+
+    const countriesData = [
+        
     {
-        "country": "Afghanistan",
-        "population": 37172386
+        "country": "Afghanistan", "population": 37172386
     },
     {
-        "country": "Albania",
-        "population": 2866376
+        "country": "Albania", "population": 2866376
     },
     {
-        "country": "Algeria",
-        "population": 42228429
+        "country": "Algeria", "population": 42228429
     },
     {
-        "country": "American Samoa",
-        "population": 55465
+        "country": "American Samoa", "population": 55465
     },
     {
-        "country": "Andorra",
-        "population": 77006
+        "country": "Andorra", "population": 77006
     },
     {
-        "country": "Angola",
-        "population": 30809762
+        "country": "Angola", "population": 30809762
     },
     {
-        "country": "Anguilla",
-        "population": 15094
+        "country": "Anguilla", "population": 15094
     },
     {
-        "country": "Antarctica",
-        "population": 1106
+        "country": "Antarctica", "population": 1106
     },
     {
-        "country": "Antigua and Barbuda",
-        "population": 96286
+        "country": "Antigua and Barbuda", "population": 96286
     },
     {
-        "country": "Argentina",
-        "population": 44494502
+        "country": "Argentina", "population": 44494502
     },
     {
         "country": "Armenia",
@@ -979,119 +971,82 @@ const country_pop = [
         "country": "Zimbabwe",
         "population": 14439018
     }
-];
+    ];
+    
+    // Function to display the default countries and their population
+    function displayCountries() {
+        const tableBody = document.getElementById('countryTableBody');
+        // Clear existing table content
+        tableBody.innerHTML = '';
 
-
-// Array.map. executes a function(square the numbers) on every array element and returns a new array.
-//1. Create an array method to create an array and push to it all countries which its population is an odd number and its name has five, six or seven letters.
-
-const oddPopulationCountries = country_pop.filter(
-    (country_n) => country_n.population % 2 !== 0 && (country_n.country === 5 || country_n.country.length === 6 || country_n.country.length === 7)
-);
-
-const oddPopulationCountryNames = oddPopulationCountries.map(
-    (country_n) => {
-        if (country_n.country !== undefined) {
-            return country_n.country;
-        }else {
-            return '';
-        }
-    }
-);
-
-console.log(oddPopulationCountryNames);
-
-// 1. Print all countries whose population is a perfect square.
-
-const isPerfectSquare = (population) => {
-    if (population % 1 !== 0) {
-        return undefined;
-    }
-    const sqrt = Math.sqrt(population);
-    return Number.isInteger(sqrt);
-}; //returns true if the number is a perfect square and false if its not.
-
-const filterPerfectSquareCountries = () => {
-    const perfectSquareCountries = country_pop.filter((country)=>{
-        return isPerfectSquare(country.population);
-    });
-
-    const filteredCountries = [];
-    for (const country of perfectSquareCountries) {
-        if (country.name !== undefined) {
-            filteredCountries.push(country.name);
-        }
+        //Loop through the countriesData array and append rows to the table
+        countriesData.forEach(country => {
+            const row = `<tr><td>${country.country}</td><td>${country.population}</td></tr>`;
+            tableBody.innerHTML += row;
+        });
     }
 
-    return filteredCountries;
-};
+    // Call the function to display default countries when the app starts.
+    displayCountries();
 
-const perfectSquareCountryNames = filterPerfectSquareCountries();
-console.log(perfectSquareCountryNames);
+    // Function to update the table based on the results
+    function updateTable(results) {
+        const tableBody = document.getElementById('countryTableBody');
 
-// Array.sort. rearranges elements of an array in a particular order.
+        // Clear existing tablecontent
+        tableBody.innerHTML = '';
 
-//1.Sort the country based on it population from the smallest to largest,
-const sortedCountryPop = country_pop.sort(function(cp1, cp2) {
-    if(cp1.population > cp2.population){
-            return 1;
-    }else {
-            return -1;
+        //Loop through the results array and append rows to the table
+        results.forEach(country => {
+            const row = `<tr><td>${country.country}</td><td>${country.population}</td></tr>`;
+            tableBody.innerHTML += row;
+        });
     }
-});
 
-console.log(sortedCountryPop);
+    // Function to display the results in the resultContainer
+    function displayResults(results) {
+        const resultContainer = document.getElementById("resultContainer");
 
-// Array.push .. allows you to add elements to an array and print the new length of an array
+        // Clear existing content
+        resultContainer.innerHTML = '';
 
-// Array.reduce . reduces all the elements of an array into a single value, lets say the sum.
-
-// Array.reverse . reverses an array
-
-// Array.slice. Returns a shallow copy of a portion of an array.
-
-// Array.length. Returns the number of characters in an a string.
-// 3. Array method to sort the countries based on the length of their names
-
-const validCountries = country_pop.filter((country_n) => country_n.country !== undefined && country_n.country !== null);
-
-// Sort the valid countries based on name length
-const sortedCountries = validCountries.sort((a, b) => {
-  if (a.country.length < b.country.length) {
-    return -1;
-  } else if (a.country.length > b.country.length) {
-    return 1;
-  } else {
-    return 0;
-  }
-});
-
-const sortedCountryNames = sortedCountries.map((country_n) => country_n.country);
-
-console.log(sortedCountryNames);
-
-// Array.includes. checks if an element exists in the array, returns true or false.
-
-//higher order function to filter countries based on a condition, contains letters p, s, k
-function containLetters(countries, Callback){
-    return countries.filter(Callback);
+        // Update the countries table based on the results
+        updateTable(results);
 }
 
-//Callback function for filtering countries based on name containing 'p', 's', or 'k'
-function hasLetterPSK (name){
-    const lettersToCheck = ['p', 's', 'k'];
-    const countryName = name.country.toLowerCase();
-    return lettersToCheck.some(letter => countryName.includes(letter));
+    // Function to sort the countries based on their population
+    function sortCountriesByPopulation() {
+        const sortedCountriesByPopulation = countriesData.slice().sort((a, b) => a.population - b.population);
+        displayResults(sortedCountriesByPopulation);
 }
 
-// Use the higher order function to filter countries
-const filteredCountries = containLetters(country_pop, hasLetterPSK);
+    // Function to filter countries whose name contains either letter p, s, k
+    function filterCountriesWithPSK() {
+        const countriesWithPSK = countriesData.filter(country => /p|s|k/i.test(country.country));
+        displayResults(countriesWithPSK);
+}
 
-//print the results
-console.log(filteredCountries);
+    // Function to filter countries whose population are perfect squares
+    function filterCountriesPerfectSquares() {
+        const countriesPerfectSquares = countriesData.filter(country => isPerfectSquare(country.population));
+        displayResults(countriesPerfectSquares);
+}
 
+    // Function to create an array with countries that have an odd population and a name with 5, 6, or 7 letters
+    function filterOddPopulationAndNameLength() {
+    const oddPopulationAndNameLength = countriesData.filter(country => country.population % 2 !== 0 && (country.country.length === 5 || country.country.length === 6 || country.country.length === 7));
+    displayResults(oddPopulationAndNameLength);
+}
 
+    // Function to sort the countries based on the length of their names
+    function sortCountriesByNameLength() {
+    const sortedCountriesByNameLength = countriesData.slice().sort((a, b) => a.country.length - b.country.length);
+    displayResults(sortedCountriesByNameLength);
+}
 
-
-
+    // Function to check if a number is a perfect square
+    function isPerfectSquare(number) {
+    return Math.sqrt(number) % 1 === 0;
+    displayResults();
+}
 
