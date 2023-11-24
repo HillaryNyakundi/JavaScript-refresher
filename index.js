@@ -1018,18 +1018,28 @@
 
     // Function to sort the countries based on their population
     function sortCountriesByPopulation() {
+
+        // create a sample array of the main array using slice to avoid modification of the main array
         const sortedCountriesByPopulation = countriesData.slice().sort((a, b) => a.population - b.population);
+
+        //display the sorted results in the table
         displayResults(sortedCountriesByPopulation);
 }
 
     // Function to filter countries whose name contains either letter p, s, k
     function filterCountriesWithPSK() {
+
+        //create a new array that uses the filter method to satisfy the given condition.
         const countriesWithPSK = countriesData.filter(country => /p|s|k/i.test(country.country));
+
+        //Display the filtered results in the table by calling the dispalyResults function.The original array remains unchanged
         displayResults(countriesWithPSK);
 }
 
     // Function to filter countries whose population are perfect squares
     function filterCountriesPerfectSquares() {
+
+        //The filter method takes a callback function as an argument, it is called for each element(country)in the array, the cb checks if the population is a perfect square by calling isPerfectSquare
         const countriesPerfectSquares = countriesData.filter(country => isPerfectSquare(country.population));
         displayResults(countriesPerfectSquares);
 }
@@ -1042,6 +1052,7 @@
 
     // Function to sort the countries based on the length of their names
     function sortCountriesByNameLength() {
+    // slice method(derive a sample array) to avoid modifying the original array when sorting
     const sortedCountriesByNameLength = countriesData.slice().sort((a, b) => a.country.length - b.country.length);
     displayResults(sortedCountriesByNameLength);
 }
