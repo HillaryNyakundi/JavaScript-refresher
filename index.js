@@ -977,6 +977,7 @@
     function displayCountries() {
         const tableBody = document.getElementById('countryTableBody');
         // Clear existing table content
+        // innerHtml property allows you to get or set the HTML content within an element
         tableBody.innerHTML = '';
 
         //Loop through the countriesData array and append rows to the table
@@ -1004,6 +1005,7 @@
     }
 
     // Function to display the results in the resultContainer
+    // Manage and display different sets of results in your application
     function displayResults(results) {
         const resultContainer = document.getElementById("resultContainer");
 
@@ -1047,6 +1049,5 @@
     // Function to check if a number is a perfect square
     function isPerfectSquare(number) {
     return Math.sqrt(number) % 1 === 0;
-    displayResults();
 }
 
